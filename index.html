@@ -1,0 +1,539 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="description"
+        content="A little question and a little surprise."
+    >
+
+    <title>A Little Question ❤️</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<main class="site-shell">
+
+    <!-- SCREEN 1 -->
+    <section class="screen active" id="screen-1" aria-labelledby="opening-title">
+        <div class="card intro-card">
+            <p class="eyebrow">A tiny surprise</p>
+
+            <h1 id="opening-title">Hey you 👀</h1>
+
+            <div class="message">
+                <p>I made something for you.</p>
+                <p>Don't worry… it's not as serious as you're probably thinking. 😂</p>
+                <p>Just take a minute and follow along.</p>
+            </div>
+
+            <button class="primary-btn next-btn" type="button" data-next="2">
+                Okay, I'm curious 👀
+            </button>
+        </div>
+    </section>
+
+
+    <!-- SCREEN 2 -->
+    <section class="screen" id="screen-2" aria-labelledby="thought-title">
+        <div class="card">
+            <p class="eyebrow">Before the question</p>
+
+            <h2 id="thought-title">One honest thought…</h2>
+
+            <div class="message">
+                <p>We've been friends for a while, and honestly…</p>
+                <p>I really enjoy the conversations, the jokes, and the little moments we have.</p>
+                <p>So I thought instead of just saying what I'm thinking…</p>
+                <p>I'd make something a little different. ❤️</p>
+            </div>
+
+            <button class="primary-btn next-btn" type="button" data-next="3">
+                There's one thing I want to ask you…
+            </button>
+        </div>
+    </section>
+
+
+    <!-- SCREEN 3 -->
+    <section class="screen" id="screen-3" aria-labelledby="question-title">
+        <div class="card question-card">
+            <p class="eyebrow">A little question</p>
+
+            <h2 id="question-title">Would you go on a date with me? 🌹</h2>
+
+            <p class="subtext">Just you and me. No pressure. ❤️</p>
+
+            <div class="answer-area" id="answer-area">
+                <div class="answer-buttons">
+
+                    <button
+                        class="yes-btn"
+                        id="yes-btn"
+                        type="button"
+                    >
+                        YES ❤️
+                    </button>
+
+                    <button
+                        class="no-btn"
+                        id="no-btn"
+                        type="button"
+                        aria-describedby="no-status"
+                    >
+                        NO 😭
+                    </button>
+
+                </div>
+
+                <p
+                    class="attempt-message"
+                    id="no-status"
+                    aria-live="polite"
+                ></p>
+            </div>
+
+            <a
+                href="#"
+                class="honest-decline"
+                id="honest-decline"
+            >
+                It's okay, I'd rather say no.
+            </a>
+        </div>
+    </section>
+
+
+    <!-- SCREEN 4 -->
+    <section class="screen" id="screen-4" aria-labelledby="yes-title">
+        <div class="card">
+            <p class="eyebrow">Okay then…</p>
+
+            <h2 id="yes-title">Yesss. ❤️</h2>
+
+            <div class="message">
+                <p>Okay… now let's make it a good evening.</p>
+                <p>I have one more little thing for you…</p>
+            </div>
+
+            <button class="primary-btn next-btn" type="button" data-next="5">
+                Let's plan our evening 🌙
+            </button>
+        </div>
+    </section>
+
+
+    <!-- SCREEN 5 -->
+    <section class="screen" id="screen-5" aria-labelledby="form-title">
+        <div class="card form-card">
+
+            <p class="eyebrow">Just a few little details</p>
+
+            <h2 id="form-title">Let's plan our evening.</h2>
+
+            <p class="form-intro">
+                You don't have to plan anything. Just tell me what you enjoy —
+                I'll take care of the rest.
+            </p>
+
+            <form id="date-form" novalidate>
+
+                <!-- NAME -->
+                <div class="form-group" id="name-group">
+                    <label for="name">
+                        What should I call you? <span aria-hidden="true">*</span>
+                    </label>
+
+                    <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        autocomplete="name"
+                        placeholder="Your name"
+                        required
+                    >
+
+                    <p class="field-error" id="name-error" aria-live="polite"></p>
+                </div>
+
+
+                <!-- DATE -->
+                <div class="form-group" id="date-group">
+                    <label for="date">
+                        📅 Which date would you prefer?
+                        <span aria-hidden="true">*</span>
+                    </label>
+
+                    <input
+                        id="date"
+                        name="date"
+                        type="date"
+                        required
+                    >
+
+                    <p class="field-error" id="date-error" aria-live="polite"></p>
+                </div>
+
+
+                <!-- START TIME -->
+                <fieldset class="form-group" id="time-group">
+                    <legend>
+                        🌙 When would you prefer to start?
+                        <span aria-hidden="true">*</span>
+                    </legend>
+
+                    <div class="radio-list">
+
+                        <label class="choice">
+                            <input
+                                type="radio"
+                                name="startTime"
+                                value="5:00 PM"
+                            >
+                            <span>5:00 PM</span>
+                        </label>
+
+                        <label class="choice">
+                            <input
+                                type="radio"
+                                name="startTime"
+                                value="5:30 PM"
+                            >
+                            <span>5:30 PM</span>
+                        </label>
+
+                        <label class="choice">
+                            <input
+                                type="radio"
+                                name="startTime"
+                                value="6:00 PM"
+                            >
+                            <span>6:00 PM</span>
+                        </label>
+
+                        <label class="choice">
+                            <input
+                                type="radio"
+                                name="startTime"
+                                value="6:30 PM"
+                            >
+                            <span>6:30 PM</span>
+                        </label>
+
+                        <label class="choice">
+                            <input
+                                type="radio"
+                                name="startTime"
+                                value="Other"
+                                id="other-time-radio"
+                            >
+                            <span>Other</span>
+                        </label>
+
+                    </div>
+
+                    <div
+                        class="other-time-wrapper"
+                        id="other-time-wrapper"
+                        hidden
+                    >
+                        <label for="other-time">
+                            What time works for you?
+                        </label>
+
+                        <input
+                            id="other-time"
+                            name="otherTime"
+                            type="text"
+                            placeholder="e.g. 7:00 PM"
+                        >
+                    </div>
+
+                    <p class="field-error" id="time-error" aria-live="polite"></p>
+                </fieldset>
+
+
+                <!-- DURATION -->
+                <fieldset class="form-group" id="duration-group">
+
+                    <legend>
+                        ⏳ How long would you like to stay?
+                        <span aria-hidden="true">*</span>
+                    </legend>
+
+                    <div class="radio-list">
+
+                        <label class="choice">
+                            <input
+                                type="radio"
+                                name="duration"
+                                value="Around 2.5 hours"
+                            >
+                            <span>Around 2.5 hours</span>
+                        </label>
+
+                        <label class="choice">
+                            <input
+                                type="radio"
+                                name="duration"
+                                value="Around 3 hours"
+                            >
+                            <span>Around 3 hours</span>
+                        </label>
+
+                        <label class="choice">
+                            <input
+                                type="radio"
+                                name="duration"
+                                value="I'm flexible ❤️"
+                            >
+                            <span>I'm flexible ❤️</span>
+                        </label>
+
+                    </div>
+
+                    <p
+                        class="field-error"
+                        id="duration-error"
+                        aria-live="polite"
+                    ></p>
+                </fieldset>
+
+
+                <!-- ACTIVITIES -->
+                <fieldset class="form-group" id="activities-group">
+
+                    <legend>
+                        What would you enjoy doing?
+                        <span aria-hidden="true">*</span>
+                    </legend>
+
+                    <p class="helper-text">
+                        Choose as many as you like.
+                    </p>
+
+                    <div class="checkbox-list">
+
+                        <label class="choice">
+                            <input
+                                type="checkbox"
+                                name="activities"
+                                value="☕ Coffee / tea"
+                            >
+                            <span>☕ Coffee / tea</span>
+                        </label>
+
+                        <label class="choice">
+                            <input
+                                type="checkbox"
+                                name="activities"
+                                value="🍽️ Dinner"
+                            >
+                            <span>🍽️ Dinner</span>
+                        </label>
+
+                        <label class="choice">
+                            <input
+                                type="checkbox"
+                                name="activities"
+                                value="🥤 Juice / snacks"
+                            >
+                            <span>🥤 Juice / snacks</span>
+                        </label>
+
+                        <label class="choice">
+                            <input
+                                type="checkbox"
+                                name="activities"
+                                value="🌅 Seaside / sunset"
+                            >
+                            <span>🌅 Seaside / sunset</span>
+                        </label>
+
+                        <label class="choice">
+                            <input
+                                type="checkbox"
+                                name="activities"
+                                value="🚶 Evening walk"
+                            >
+                            <span>🚶 Evening walk</span>
+                        </label>
+
+                        <label class="choice">
+                            <input
+                                type="checkbox"
+                                name="activities"
+                                value="💬 Just sitting and talking"
+                            >
+                            <span>💬 Just sitting and talking</span>
+                        </label>
+
+                    </div>
+
+                    <p
+                        class="field-error"
+                        id="activities-error"
+                        aria-live="polite"
+                    ></p>
+                </fieldset>
+
+
+                <!-- AVOID -->
+                <div class="form-group">
+
+                    <label for="avoid">
+                        Anything you'd prefer to avoid?
+                        <span class="optional">Optional</span>
+                    </label>
+
+                    <textarea
+                        id="avoid"
+                        name="avoid"
+                        rows="3"
+                        placeholder="Anything you're not into..."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- MESSAGE -->
+                <div class="form-group">
+
+                    <label for="message">
+                        Anything else you'd like me to know? ❤️
+                        <span class="optional">Optional</span>
+                    </label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="4"
+                        placeholder="Anything else on your mind..."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- NOTE -->
+                <div class="note-block">
+                    <strong>One last thing…</strong>
+                    <p>You don't have to plan anything.</p>
+                    <p>Just tell me what you enjoy.</p>
+                    <p>I'll take care of the rest. 🌙</p>
+                </div>
+
+
+                <button
+                    class="primary-btn submit-btn"
+                    id="submit-btn"
+                    type="submit"
+                >
+                    Send my answers ❤️
+                </button>
+
+                <p
+                    class="form-status"
+                    id="form-status"
+                    aria-live="polite"
+                ></p>
+
+            </form>
+        </div>
+    </section>
+
+
+    <!-- SCREEN 6 -->
+    <section class="screen" id="screen-6" aria-labelledby="success-title">
+        <div class="card success-card">
+
+            <p class="eyebrow">All set</p>
+
+            <h2 id="success-title">Perfect. ❤️</h2>
+
+            <div class="message">
+                <p>I've got everything I need.</p>
+                <p>You just tell me what you like…</p>
+                <p>I'll take care of the rest. 🌙</p>
+                <p>See you soon.</p>
+            </div>
+
+            <p class="small-message">
+                And yes… I actually put all this together just for you. 😂❤️
+            </p>
+
+            <button
+                class="secondary-btn"
+                id="ps-btn"
+                type="button"
+                aria-expanded="false"
+                aria-controls="ps-message"
+            >
+                Wait… there's one more thing 👀
+            </button>
+
+            <div
+                class="ps-message"
+                id="ps-message"
+                hidden
+                aria-live="polite"
+            >
+                <p class="ps-label">P.S.</p>
+
+                <p>I could've just texted you:</p>
+
+                <p class="quote">
+                    "Would you like to go on a date?"
+                </p>
+
+                <p>But where's the fun in that? 😂❤️</p>
+
+                <p>I'm looking forward to seeing you.</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- DECLINE -->
+    <section
+        class="screen"
+        id="screen-decline"
+        aria-labelledby="decline-title"
+    >
+        <div class="card decline-card">
+
+            <p class="eyebrow">No worries</p>
+
+            <h2 id="decline-title">No worries. ❤️</h2>
+
+            <div class="message">
+                <p>I appreciate you being honest.</p>
+                <p>Our friendship is still good.</p>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>
+```
