@@ -1,4 +1,3 @@
-
 "use strict";
 
 /*
@@ -6,12 +5,10 @@
  * A LITTLE QUESTION ❤️
  * ==========================================
  *
- * This version sends the form answers to:
+ * Sends the form answers to:
  *
- * 1. Your private Google Sheet
- * 2. Your WhatsApp number
- *
- * The Google Sheet itself remains private.
+ * 1. Private Google Sheet
+ * 2. WhatsApp
  * ==========================================
  */
 
@@ -30,28 +27,53 @@ const GOOGLE_SCRIPT_URL =
    ELEMENTS
 ========================================== */
 
-const screens = document.querySelectorAll(".screen");
+const screens =
+    document.querySelectorAll(".screen");
 
-const nextButtons = document.querySelectorAll(".next-btn");
+const nextButtons =
+    document.querySelectorAll(".next-btn");
 
-const yesButton = document.getElementById("yes-btn");
-const noButton = document.getElementById("no-btn");
-const answerArea = document.getElementById("answer-area");
-const noStatus = document.getElementById("no-status");
-const honestDecline = document.getElementById("honest-decline");
+const yesButton =
+    document.getElementById("yes-btn");
 
-const form = document.getElementById("date-form");
-const submitButton = document.getElementById("submit-btn");
-const formStatus = document.getElementById("form-status");
+const noButton =
+    document.getElementById("no-btn");
 
-const otherTimeRadio = document.getElementById("other-time-radio");
-const otherTimeWrapper = document.getElementById("other-time-wrapper");
-const otherTimeInput = document.getElementById("other-time");
+const answerArea =
+    document.getElementById("answer-area");
 
-const psButton = document.getElementById("ps-btn");
-const psMessage = document.getElementById("ps-message");
+const noStatus =
+    document.getElementById("no-status");
 
-const dateInput = document.getElementById("date");
+const honestDecline =
+    document.getElementById("honest-decline");
+
+const form =
+    document.getElementById("date-form");
+
+const submitButton =
+    document.getElementById("submit-btn");
+
+const formStatus =
+    document.getElementById("form-status");
+
+const otherTimeRadio =
+    document.getElementById("other-time-radio");
+
+const otherTimeWrapper =
+    document.getElementById("other-time-wrapper");
+
+const otherTimeInput =
+    document.getElementById("other-time");
+
+const psButton =
+    document.getElementById("ps-btn");
+
+const psMessage =
+    document.getElementById("ps-message");
+
+const dateInput =
+    document.getElementById("date");
 
 
 /* ==========================================
@@ -69,16 +91,33 @@ const noMessages = [
 
 
 /* ==========================================
+   ALLOWED DATES
+========================================== */
+
+const ALLOWED_DATES = [
+    "2026-10-07",
+    "2026-10-08",
+    "2026-10-09"
+];
+
+dateInput.min = "2026-10-07";
+dateInput.max = "2026-10-09";
+
+
+/* ==========================================
    SCREEN NAVIGATION
 ========================================== */
 
 function showScreen(screenNumber) {
+
     screens.forEach((screen) => {
         screen.classList.remove("active");
     });
 
     const targetScreen =
-        document.getElementById(`screen-${screenNumber}`);
+        document.getElementById(
+            `screen-${screenNumber}`
+        );
 
     if (!targetScreen) {
         return;
@@ -89,15 +128,22 @@ function showScreen(screenNumber) {
     window.scrollTo({
         top: 0,
         behavior:
-            window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            ).matches
                 ? "auto"
                 : "smooth"
     });
 
-    const heading = targetScreen.querySelector("h1, h2");
+    const heading =
+        targetScreen.querySelector("h1, h2");
 
     if (heading) {
-        heading.setAttribute("tabindex", "-1");
+
+        heading.setAttribute(
+            "tabindex",
+            "-1"
+        );
 
         heading.focus({
             preventScroll: true
@@ -111,13 +157,20 @@ function showScreen(screenNumber) {
 ========================================== */
 
 nextButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-        const nextScreen = button.dataset.next;
 
-        if (nextScreen) {
-            showScreen(nextScreen);
+    button.addEventListener(
+        "click",
+        () => {
+
+            const nextScreen =
+                button.dataset.next;
+
+            if (nextScreen) {
+                showScreen(nextScreen);
+            }
         }
-    });
+    );
+
 });
 
 
@@ -129,10 +182,16 @@ function handleNo() {
     showScreen("decline");
 }
 
-honestDecline.addEventListener("click", (event) => {
-    event.preventDefault();
-    handleNo();
-});
+
+honestDecline.addEventListener(
+    "click",
+    (event) => {
+
+        event.preventDefault();
+
+        handleNo();
+    }
+);
 
 
 /* ==========================================
@@ -140,31 +199,46 @@ honestDecline.addEventListener("click", (event) => {
 ========================================== */
 
 function moveNoButton() {
+
     if (noAttempts >= 5) {
         return;
     }
 
-    const containerWidth = answerArea.clientWidth;
-    const containerHeight = answerArea.clientHeight;
+    const containerWidth =
+        answerArea.clientWidth;
 
-    const buttonWidth = noButton.offsetWidth;
-    const buttonHeight = noButton.offsetHeight;
+    const containerHeight =
+        answerArea.clientHeight;
+
+    const buttonWidth =
+        noButton.offsetWidth;
+
+    const buttonHeight =
+        noButton.offsetHeight;
 
     const availableX =
-        Math.max(0, containerWidth - buttonWidth);
+        Math.max(
+            0,
+            containerWidth - buttonWidth
+        );
 
     const availableY =
-        Math.max(0, containerHeight - buttonHeight);
+        Math.max(
+            0,
+            containerHeight - buttonHeight
+        );
 
-    /*
-     * Keep movement playful and small.
-     * The real measured dimensions are used.
-     */
     const movementX =
-        Math.min(availableX, 90);
+        Math.min(
+            availableX,
+            90
+        );
 
     const movementY =
-        Math.min(availableY, 50);
+        Math.min(
+            availableY,
+            50
+        );
 
     const x =
         (Math.random() * movementX) -
@@ -177,15 +251,20 @@ function moveNoButton() {
     noButton.style.transform =
         `translate(${x}px, ${y}px)`;
 
-    noButton.classList.remove("no-moving");
+    noButton.classList.remove(
+        "no-moving"
+    );
 
     void noButton.offsetWidth;
 
-    noButton.classList.add("no-moving");
+    noButton.classList.add(
+        "no-moving"
+    );
 }
 
 
 function handleNoAttempt(event) {
+
     if (noAttempts >= 5) {
         return;
     }
@@ -204,6 +283,7 @@ function handleNoAttempt(event) {
         noMessages[messageIndex];
 
     if (noAttempts >= 5) {
+
         noButton.textContent =
             "NO — it's okay";
 
@@ -234,6 +314,7 @@ noButton.addEventListener(
     handleNoAttempt
 );
 
+
 noButton.addEventListener(
     "keydown",
     (event) => {
@@ -248,7 +329,9 @@ noButton.addEventListener(
         event.preventDefault();
 
         if (noAttempts >= 5) {
+
             handleNo();
+
             return;
         }
 
@@ -256,12 +339,15 @@ noButton.addEventListener(
     }
 );
 
+
 noButton.addEventListener(
     "click",
     () => {
+
         if (noAttempts >= 5) {
             handleNo();
         }
+
     }
 );
 
@@ -281,36 +367,13 @@ yesButton.addEventListener(
 
 
 /* ==========================================
-   DATE
-========================================== */
-
-function setMinimumDate() {
-    const today = new Date();
-
-    const year =
-        today.getFullYear();
-
-    const month =
-        String(today.getMonth() + 1)
-            .padStart(2, "0");
-
-    const day =
-        String(today.getDate())
-            .padStart(2, "0");
-
-    dateInput.min =
-        `${year}-${month}-${day}`;
-}
-
-setMinimumDate();
-
-
-/* ==========================================
    OTHER TIME
 ========================================== */
 
 document
-    .querySelectorAll('input[name="startTime"]')
+    .querySelectorAll(
+        'input[name="startTime"]'
+    )
     .forEach((radio) => {
 
         radio.addEventListener(
@@ -332,13 +395,15 @@ document
                     otherTimeInput.value =
                         "";
                 }
+
             }
         );
+
     });
 
 
 /* ==========================================
-   VALIDATION
+   VALIDATION HELPERS
 ========================================== */
 
 function showFieldError(
@@ -346,13 +411,20 @@ function showFieldError(
     errorId,
     message
 ) {
+
     const group =
-        document.getElementById(groupId);
+        document.getElementById(
+            groupId
+        );
 
     const error =
-        document.getElementById(errorId);
+        document.getElementById(
+            errorId
+        );
 
-    group.classList.add("has-error");
+    group.classList.add(
+        "has-error"
+    );
 
     error.textContent =
         message;
@@ -363,22 +435,34 @@ function clearFieldError(
     groupId,
     errorId
 ) {
+
     const group =
-        document.getElementById(groupId);
+        document.getElementById(
+            groupId
+        );
 
     const error =
-        document.getElementById(errorId);
+        document.getElementById(
+            errorId
+        );
 
-    group.classList.remove("has-error");
+    group.classList.remove(
+        "has-error"
+    );
 
     error.textContent =
         "";
 }
 
 
+/* ==========================================
+   FORM VALIDATION
+========================================== */
+
 function validateForm() {
 
     let isValid = true;
+
 
     clearFieldError(
         "name-group",
@@ -461,12 +545,14 @@ function validateForm() {
 
         isValid = false;
 
-    } else if (date < dateInput.min) {
+    } else if (
+        !ALLOWED_DATES.includes(date)
+    ) {
 
         showFieldError(
             "date-group",
             "date-error",
-            "Please choose a future date."
+            "Please choose October 7, 8, or 9, 2026."
         );
 
         isValid = false;
@@ -516,7 +602,9 @@ function validateForm() {
 
     /* ACTIVITIES */
 
-    if (selectedActivities.length === 0) {
+    if (
+        selectedActivities.length === 0
+    ) {
 
         showFieldError(
             "activities-group",
@@ -556,7 +644,8 @@ function collectFormData() {
                 'input[name="activities"]:checked'
             )
         ).map(
-            (checkbox) => checkbox.value
+            (checkbox) =>
+                checkbox.value
         );
 
 
@@ -567,6 +656,7 @@ function collectFormData() {
 
 
     if (startTime === "Other") {
+
         startTime =
             otherTimeInput.value.trim();
     }
@@ -682,34 +772,30 @@ Looking forward to it. ❤️`;
    SAVE TO PRIVATE GOOGLE SHEET
 ========================================== */
 
-/*
- * Google Apps Script accepts the JSON POST.
- *
- * "no-cors" is intentional here because the Google
- * Apps Script endpoint does not need to return data
- * to the browser. It only needs to receive the answers.
- *
- * We do NOT wait for this request before opening
- * WhatsApp.
- */
-
 function saveToGoogleSheet(data) {
 
     const payload = {
 
-        name: data.name,
+        name:
+            data.name,
 
-        date: data.date,
+        date:
+            data.date,
 
-        startTime: data.startTime,
+        startTime:
+            data.startTime,
 
-        duration: data.duration,
+        duration:
+            data.duration,
 
-        activities: data.activities.join(", "),
+        activities:
+            data.activities.join(", "),
 
-        avoid: data.avoid,
+        avoid:
+            data.avoid,
 
-        message: data.message
+        message:
+            data.message
     };
 
 
@@ -728,22 +814,23 @@ function saveToGoogleSheet(data) {
                 },
 
                 body:
-                    JSON.stringify(payload),
+                    JSON.stringify(
+                        payload
+                    ),
 
                 keepalive: true
             }
         ).catch(() => {
+
             /*
              * Do not interrupt the experience.
-             *
-             * WhatsApp is already being opened
-             * independently.
              */
         });
 
     } catch (error) {
+
         /*
-         * Do not show a generic error to her.
+         * Do not show a generic error.
          */
     }
 }
@@ -764,16 +851,7 @@ function sendFormData(data) {
 
 
     /*
-     * IMPORTANT:
-     *
-     * WhatsApp is opened synchronously FIRST.
-     *
-     * No await.
-     * No fetch before this.
-     * No setTimeout.
-     * No asynchronous operation.
-     *
-     * This helps mobile browsers allow the popup.
+     * Open WhatsApp first.
      */
 
     window.open(
@@ -784,16 +862,16 @@ function sendFormData(data) {
 
 
     /*
-     * Save a copy to your private Google Sheet.
-     *
-     * This happens after window.open.
+     * Save a copy to Google Sheets.
      */
+
     saveToGoogleSheet(data);
 
 
     /*
-     * Show the success screen.
+     * Show success screen.
      */
+
     showScreen("6");
 }
 
@@ -808,7 +886,8 @@ form.addEventListener(
 
         event.preventDefault();
 
-        formStatus.textContent = "";
+        formStatus.textContent =
+            "";
 
 
         if (!validateForm()) {
@@ -816,10 +895,12 @@ form.addEventListener(
             formStatus.textContent =
                 "Almost there — please check the highlighted fields.";
 
+
             const firstError =
                 form.querySelector(
                     ".has-error input, .has-error textarea"
                 );
+
 
             if (firstError) {
                 firstError.focus();
@@ -832,6 +913,7 @@ form.addEventListener(
         /*
          * Prevent duplicate submissions.
          */
+
         submitButton.disabled =
             true;
 
@@ -843,11 +925,8 @@ form.addEventListener(
             collectFormData();
 
 
-        /*
-         * WhatsApp opens synchronously.
-         * Google Sheet saving happens afterward.
-         */
         sendFormData(data);
+
     }
 );
 
@@ -899,7 +978,8 @@ psButton.addEventListener(
 
                 block: "nearest"
             });
+
         }
+
     }
 );
-
